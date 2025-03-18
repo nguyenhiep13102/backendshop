@@ -1,0 +1,19 @@
+# POST http://localhost:5001/api/user
+# Content-Type: application/json
+
+# {
+#     "name": "Nguyễn Văn Hiệp",
+#     "email": "avc@example.com",
+#     "password": "123456",
+#     "confirmPassword": "123456",
+#     "phone": "0987654321",
+#     "isAdmin": false
+# }
+
+POST http://localhost:5001/api/user/login
+Content-Type: application/json
+
+{
+    "email": "avc@example.com",
+    "password": "123456"
+}
