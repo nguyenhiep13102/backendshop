@@ -1,19 +1,134 @@
-# POST http://localhost:5001/api/user
+# POST http://localhost:5001/api/user/sign-up
 # Content-Type: application/json
 
 # {
-#     "name": "Nguyễn Văn Hiệp",
-#     "email": "avc@example.com",
+#     "name": "vũ bá tư",
+#     "email": "hiep@example.com",
 #     "password": "123456",
 #     "confirmPassword": "123456",
 #     "phone": "0987654321",
+#     "isAdmin": true
+# }
+
+# POST http://localhost:5001/api/user/sign-in
+# Content-Type: application/json
+
+# {
+#     "email": "hiep@example.com",
+#     "password": "123456"
+# }
+
+# POST http://localhost:5001/api/user/sign-in
+# Content-Type: application/json
+
+# {
+#     "email": "tu1234@example.com",
+#     "password": "123456"
+# }
+
+
+# PUT http://localhost:5001/api/user/delete-user/67dc04ac8bd60ac981fb6413
+# Content-Type: application/json
+
+# {
+#     "name": "Nguyễn Văn Hiệp Updated",
+#     "email": "hiepupdated@example.com",
+#     "phone": "0987111222",
 #     "isAdmin": false
 # }
 
-POST http://localhost:5001/api/user/login
+# PUT http://localhost:5001/api/user/update-user/67dc04ac8bd60ac981fb6413
+# Content-Type: application/json
+
+# {
+#     "name": "Nguyễn Văn phương ",
+#     "phone": "0909123456"
+# }
+
+
+# DELETE http://localhost:5001/api/user/delete-user/67e55de80ce1af4dfd557ce2
+# DELETE http://localhost:5001/api/user/delete-user-admin/67d9b8659026f55544a5f80d
+
+
+# DELETE http://localhost:5001/api/user/delete-user-admin/67dd4334e39df28d138df623
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZDliODFhOTAyNmY1NTU0NGE1ZjgwYSIsImlhdCI6MTc0MzE5ODE3MiwiZXhwIjoxNzQzODAyOTcyfQ.Qy9jvJVyrORDc1K6LlIfc3aL0QqlLrwEwzH7Z8zifV0
+
+
+# GET http://localhost:5001/api/user/getAll
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZTcxNzMwY2M5ZTE5ZDQxZDllNjE2NSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTc0NDE5NTgzNywiZXhwIjoxNzQ0MTk5NDM3fQ.iAMkN8jGjFmtXCwanhaxHncmhINyt2W92NLReIfFXY8
+
+
+# # GET http://localhost:5001/api/user/getUserDetail/67d9b81a9026f55544a5f80
+
+
+
+# Post http://localhost:5001/api/user/refresh-token
+
+
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZTcxNzMwY2M5ZTE5ZDQxZDllNjE2NSIsImlhdCI6MTc0MzY3NDE0MSwiZXhwIjoxNzQ0Mjc4OTQxfQ.6unvjSoZjwMP-uIi3Ybe0vpKUiVkP0BxbDfwHiRTJsM
+
+
+#  API Product
+
+
+# POST http://localhost:5001/api/Product/create-Product
+# Content-Type: application/json
+
+# {
+#   "name": "nokia",
+#   "image": "/images/iphone15.jpg",
+#   "type": "smartphone",
+#   "price": 1099,
+#   "countInStock": 15,
+#   "rating": 4.8,
+#   "description": "Flagship phone from Apple, powerful and sleek."
+# }
+
+# PUT http://localhost:5001/api/Product/update-Product/67f6708d69de124c5a58f623
+# Content-Type: application/json
+
+# {
+#   "name": "ip 15"
+# }
+
+# PUT http://localhost:5001/api/Product/update-Product/67f6708d69de124c5a58f623
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZTcxNzMwY2M5ZTE5ZDQxZDllNjE2NSIsImlhdCI6MTc0NDI4NzgxMiwiZXhwIjoxNzQ0NTQ3MDEyfQ.43actpyMMgnur4UcJMyw9exMTWVDiKybvy5qoiGVAvE
+
+# {
+#   "name": "ip 15"
+# }
+
+
+# GET  http://localhost:5001/api/Product/getUserDetail/67f6708d69de124c5a58f623
+# Content-Type: application/json
+
+
+
+# DELETE  http://localhost:5001/api/Product/delete-Product/67f6708d69de124c5a58f623
+# Content-Type: application/json
+
+
+# GET  http://localhost:5001/api/Product/getAllProduct
+# Content-Type: application/json
+
+# GET  http://localhost:5001/api/Product/getPaginatedProducts
+# Content-Type: application/json
+
+
+
+GET http://localhost:5001/api/Product/getPaginatedProducts?page=1&limit=2
+
 Content-Type: application/json
 
-{
-    "email": "avc@example.com",
-    "password": "123456"
-}
+
+
+
+
+
+
+
+
+
+
+
+

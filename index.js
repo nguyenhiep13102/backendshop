@@ -1,7 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import connectToDatabase from './src/config/connect.js';
-import Product from './src/models/ProductModel.js';
 import routes from './src/routes/index.js';
 import bodyParser  from 'body-parser';
 import cors from 'cors';

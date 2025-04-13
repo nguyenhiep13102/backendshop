@@ -1,0 +1,11 @@
+import express from 'express';
+import Productcontroller from '../controllers/ProductController.js';
+import authMiddlewares from '../middlewares/authMiddlewares.js';
+let routes = express.Router();
+ routes.post('/create-Product',Productcontroller.createProduct );
+ routes.put('/update-Product/:id',authMiddlewares.authMiddleware , Productcontroller.updateProduct);
+routes.get('/getProductDetail/:id', Productcontroller.getProductDetail);
+routes.delete('/delete-Product/:id', Productcontroller.deleteProduct);
+routes.get('/getAllProduct', Productcontroller.getAllProduct);
+routes.get('/getPaginatedProducts', Productcontroller.getPaginatedProducts);
+export default routes;

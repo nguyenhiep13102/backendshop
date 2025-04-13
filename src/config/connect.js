@@ -3,8 +3,8 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-// const uri = process.env.MONGODB_URI; 
-const uri = 'mongodb+srv://root:123@cluster0.qg45u.mongodb.net/hiepct?retryWrites=true&w=majority&appName=Cluster0'; 
+ const uri = process.env.MONGODB_URI; 
+//const uri = 'mongodb+srv://root:123@cluster0.qg45u.mongodb.net/hiepct?retryWrites=true&w=majority&appName=Cluster0'; 
 console.log('🔍 Kết nối đến:', uri);
 
 const connectToDatabase = async () => {
