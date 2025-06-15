@@ -1,11 +1,14 @@
 import express from 'express';
 import Productcontroller from '../controllers/ProductController.js';
 import authMiddlewares from '../middlewares/authMiddlewares.js';
+import upload from '../middlewares/uploadProduct.js';
 let routes = express.Router();
- routes.post('/create-Product',Productcontroller.createProduct );
- routes.put('/update-Product/:id',authMiddlewares.authMiddleware , Productcontroller.updateProduct);
+ routes.post('/create-Product',upload.single('productimage') ,Productcontroller.createProduct );
+ routes.put('/update-Product/:id',authMiddlewares.authMiddleware ,upload.single('productimage') , Productcontroller.updateProduct);
 routes.get('/getProductDetail/:id', Productcontroller.getProductDetail);
-routes.delete('/delete-Product/:id', Productcontroller.deleteProduct);
+routes.delete('/delete-Product/:id',authMiddlewares.authMiddleware , Productcontroller.deleteProduct);
 routes.get('/getAllProduct', Productcontroller.getAllProduct);
 routes.get('/getPaginatedProducts', Productcontroller.getPaginatedProducts);
+routes.post('/delete-many',authMiddlewares.authMiddleware,authMiddlewares.adminMiddlewarw,Productcontroller.deleteProductmany);
+routes.get('/getAllType', Productcontroller.getAlltype);
 export default routes;

@@ -3,7 +3,7 @@ import Product from '../models/ProductModel.js';
 
 
 const CreateProduct = async (newProduct) => {
-    const { name, image, type, price, countInStock, rating, description } = newProduct;
+    const { name, image, type, price, countInStock, rating, description,discount,selled } = newProduct;
 
     const checkProduct = await Product.findOne({ name });
     if (checkProduct) {
@@ -15,7 +15,7 @@ const CreateProduct = async (newProduct) => {
     }
 
     const createdProduct = await Product.create({
-        name, image, type, price, countInStock, rating, description
+        name, image, type, price, countInStock, rating, description,discount,selled
     });
 
     return {
@@ -26,7 +26,7 @@ const CreateProduct = async (newProduct) => {
 };
 const updateProduct = async (id, data) => {
     try {    
-        const allowedFields = ['name', 'image', 'type', 'price', 'countInStock', 'rating', 'description'];
+        const allowedFields = ['name', 'image', 'type', 'price', 'countInStock', 'rating', 'description','discount' , 'selled'];
         const filteredData = Object.fromEntries(
             Object.entries(data).filter(([key, value]) => allowedFields.includes(key) && value !== undefined)
         );
@@ -57,7 +57,7 @@ const updateProduct = async (id, data) => {
 };
 const getProductDetail = async (id) => {
     try {
-        const product = await Product.findById(id, "-password"); // Lấy user theo ID và ẩn password
+        const product = await Product.findById(id, ); 
         return product;
     } catch (error) {
         console.error("Error in getUserById Service:", error);
@@ -76,13 +76,34 @@ const deleteProduct = async(id)=>{
         await product.deleteOne();
 
         return {
-            status: "success",
+           
+            status: "OK",
             message: "Xoá san pham thành công!",
         };  
     }catch{
         throw e;
     }
 };
+const deleteProductmany = async (ids) => {
+    try {
+        const result = await Product.deleteMany({ _id: { $in: ids } });
+
+        if (result.deletedCount === 0) {
+            return {
+                status: "error",
+                message: "Không tìm thấy sản phẩm nào để xoá!",
+            };
+        }
+
+        return {
+            status: "OK",
+            message: `Đã xoá ${result.deletedCount} sản phẩm thành công!`,
+        };
+    } catch (e) {
+        throw e;
+    }
+};
+
 const getAllProduct = async () => {
     try {
         const product = await Product.find({}, "-password"); 
@@ -98,16 +119,15 @@ const getAllProduct = async () => {
         throw error; 
     }
 };
-const getPaginatedProducts = async ({ page, limit, sortParam, search } ) => {
+const getPaginatedProducts = async ({ page, limit, sortParam, search ,type  } ) => {
     try {
 let filter = {};
-
-
-
-
-       if (search) {
-    filter.name = { $regex: search, $options: 'i' };
-  }
+     if (search) {
+       filter.name = { $regex: search, $options: 'i' };
+      }
+      if (type) {
+      filter.type = type; 
+    }
 
 
   let sortOption = {};
@@ -139,7 +159,14 @@ let filter = {};
         throw error; 
     }
 };
-
+export const getProductTypes = async (req, res) => {
+  try {
+    const types = await Product.distinct("type"); // Lấy các giá trị "type" không trùng
+   return  types ;
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 
 export default {
     CreateProduct,
@@ -148,5 +175,7 @@ export default {
     deleteProduct,
     getAllProduct,
     getPaginatedProducts,
+    deleteProductmany,
+    getProductTypes,
     
 };

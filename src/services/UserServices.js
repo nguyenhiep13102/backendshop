@@ -5,7 +5,7 @@ import { generateAccessToken, generateRefreshToken } from "../utils/token.js";
 
 const CreateUser = async (userData) => {
     try {
-        const { name, email, password, phone, isAdmin } = userData;
+        const { name, email, password, phone, isAdmin, addres } = userData;
 
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
@@ -16,6 +16,7 @@ const CreateUser = async (userData) => {
             password: hashedPassword,
             phone,
             isAdmin: isAdmin || false,
+            addres,
         });
 
         const savedUser = await newUser.save();
@@ -29,7 +30,8 @@ const CreateUser = async (userData) => {
                 email: savedUser.email,
                 phone: savedUser.phone,
                 isAdmin: savedUser.isAdmin,
-                hashedPassword: savedUser.password 
+                hashedPassword: savedUser.password ,
+                addres: addres
             },
         };
     } catch (e) {      
@@ -41,7 +43,7 @@ const LoginUser = async(email,password)=>{
         const user = await User.findOne({ email });
         if (!user) {
             return {
-                status: 'error',
+                status: 'ERR',
                 message: 'Email không tồn tại!',
             };
         }
@@ -49,11 +51,11 @@ const LoginUser = async(email,password)=>{
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) {
             return {
-                status: 'error',
+                status: 'ERR',
                 message: 'Mật khẩu không đúng!',
             };
         }
-        const accessToken = await generateAccessToken(user._id);
+        const accessToken = await generateAccessToken(user._id,user.isAdmin );
         const  refreshToken = await generateRefreshToken(user._id);
          user.refresh_token = refreshToken;
         await user.save();
@@ -63,15 +65,15 @@ const LoginUser = async(email,password)=>{
             message: 'Đăng nhập thành công!',
             accessToken,
             refreshToken,
-            user: {
-                id: user._id,
-                name: user.name,
-                email: user.email,
-                phone: user.phone,
-                isAdmin: user.isAdmin,
+            // user: {
+            //     id: user._id,
+            //     name: user.name,
+            //     email: user.email,
+            //     phone: user.phone,
+            //     isAdmin: user.isAdmin,
               
 
-            },
+            // },
         }
 
     }catch{
@@ -91,6 +93,10 @@ const updateUser = async(id ,data)=>{
           if (data.name) user.name = data.name;
         if (data.email) user.email = data.email;
         if (data.phone) user.phone = data.phone;
+        if (data.avatar) user.avatar = data.avatar;
+        if (data.addres) user.addres = data.addres;
+        if (data.city) user.city = data.city;
+
 
          if (data.password) {
             const matkhaumoi = await bcrypt.genSalt(10);
@@ -106,11 +112,36 @@ const updateUser = async(id ,data)=>{
                 email: updatedUser.email,
                 phone: updatedUser.phone,
                 isAdmin: updatedUser.isAdmin,
+                avatar:updatedUser.avatar,
+                 addres:updatedUser.addres,
+                 city:updatedUser.city,
+               
                 
             },
         };
       
 
+    }catch{
+        throw e;
+    }
+};
+const deleteUserMany = async(ids)=>{
+    try{
+        
+        const user = await User.deleteMany({ _id: { $in: ids } });
+        
+          if (user.deletedCount === 0) {
+            return {
+                status: "error",
+                message: "Không tìm thấy sản phẩm nào để xoá!",
+            };
+        }
+       
+
+        return {
+            status: "success",
+            message: `Đã xoá ${user.deletedCount} người dùng thành công!`,
+        };  
     }catch{
         throw e;
     }
@@ -161,5 +192,6 @@ export default {
     deleteUser,
     getAllUser,
     getUserById,
+    deleteUserMany
     
 };

@@ -27,6 +27,7 @@ const  orderSchema = new mongoose.Schema({
     totalPrice: {type: Number , required : true },
     user: {type: mongoose.Schema.Types.ObjectId , ref : 'User', required : true},
     isPaid : {type: Boolean, default: false},
+    paidAt :{type : Date , default: null},
     isDelivered: {type : Boolean , default: false},
     deliveredAt :{type: Date },
 },

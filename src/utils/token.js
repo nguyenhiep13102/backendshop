@@ -1,10 +1,11 @@
 import jwt from 'jsonwebtoken';
 import User from "../models/UserModel.js";
 
-export const generateAccessToken = (userId)=> {
+export const generateAccessToken = (userId,isAdmin )=> {
     console.log('userId',userId)
-    return jwt.sign({id : userId }, process.env.ACCESS_TOKEN_SECRET, {
-        expiresIn: '3d'
+    console.log('isAdmin:', isAdmin);
+    return jwt.sign({id : userId ,isAdmin }, process.env.ACCESS_TOKEN_SECRET, {
+        expiresIn: '1h'
     });
 };
 export const generateRefreshToken = async (userId) => {
