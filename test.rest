@@ -248,7 +248,46 @@
 #   "user": "67d9b81a9026f55544a5f80a"
 # }
 
-GET  http://localhost:5001/api/Order/get-Order-detail/680eb3a4ad78f75c33e6d633
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MGViM2E0YWQ3OGY3NWMzM2U2ZDYzMyIsImlzQWRtaW4iOnRydWUsImlhdCI6MTc0OTk3NDU2MSwiZXhwIjoxNzQ5OTc4MTYxfQ.mRgMCgfRMlZOU1dsgT9Re6j9iPdAk5ija-f4YE4B5wo
+# GET  http://localhost:5001/api/Order/DetailOrderbyid/685144151088def7d49912e4
+# Content-Type: application/json
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZTcxNzMwY2M5ZTE5ZDQxZDllNjE2NSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTc1MDMwOTQwNSwiZXhwIjoxNzUwMzEzMDA1fQ.vtTeN6mYyCztf4O1Hs6ySnNyzz9tuVD5xw3SjNWgtBA
 
+# post  http://localhost:5001/api/Order/cancelOrder/6853a333fd611ce4fffa2a69
+# Content-Type: application/json
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MGViM2E0YWQ3OGY3NWMzM2U2ZDYzMyIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3NTAzMTE4OTgsImV4cCI6MTc1MDMxNTQ5OH0.Hdpw90XiiU1sFEI7J4Yc2RMIgFngAKlOXatdHEVOoqI
+
+
+# GET  http://localhost:5001/api/Order/admin/getAllorders2?status=shipping
+# Content-Type: application/json
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZTcxNzMwY2M5ZTE5ZDQxZDllNjE2NSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTc1MDM1Nzk3NSwiZXhwIjoxNzUwMzYxNTc1fQ.gUalz_woP_NJiEd8WVdWtHEtdAAlgooZnWlsXH7cJVI
+
+
+# Post http://localhost:5001/api/Order/admin/update-status/68545977d80e95cce518934a
+# Content-Type: application/json
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZTcxNzMwY2M5ZTE5ZDQxZDllNjE2NSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTc1MDM2MTY4MiwiZXhwIjoxNzUwMzY1MjgyfQ.HMPGmuiHe9bpScXuLWW2-t0KquYIBoOc2D_WoLgM7f4
+
+# {
+#   "status": "shipping"
+# }
+
+# GET http://localhost:5001/api/payment/vnpay/create-payment?amount=50000&orderId=OD1234
+
+
+
+# POST http://localhost:5001/api/Order/admin/update-status/68545977d80e95cce518934a
+# Content-Type: application/json
+
+# {
+#   "status": "confirmed"
+# }const VNP_IPN_URL = 'https://14ca-58-187-228-140.ngrok-free.app/api/payment/vnpay-ipn';
+
+
+
+post http://localhost:5001/api/payment/creatvnpay
+Content-Type: application/json
+
+{
+  "amount": 10000,
+  "bankCode": "VNBANK",
+  "language": "vn"
+}

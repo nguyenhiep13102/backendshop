@@ -6,7 +6,7 @@ dotenv.config();
 
 async function updatePaidAtForOrders() {
   try {
-    await mongoose.connect(process.env.MONGO_URI || '', {
+    await mongoose.connect(process.env.MONGO_URI || 'mongodb+srv://root:123@cluster0.qg45u.mongodb.net/hiepct?retryWrites=true&w=majority&appName=Cluster0', {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });

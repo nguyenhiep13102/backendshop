@@ -161,7 +161,7 @@ let filter = {};
 };
 export const getProductTypes = async (req, res) => {
   try {
-    const types = await Product.distinct("type"); // Lấy các giá trị "type" không trùng
+    const types = await Product.distinct("type"); 
    return  types ;
   } catch (error) {
     res.status(500).json({ message: error.message });
